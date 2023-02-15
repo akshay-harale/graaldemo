@@ -1,0 +1,61 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.7'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'org.sonarqube' version '3.0'
+	id 'jacoco'
+}
+
+ext {
+	set('springCloudVersion', "2.3.5")
+}
+
+
+group = 'com.vertexinc.commonconfig'
+sourceCompatibility = '17'
+version='1.0'
+
+repositories {
+	mavenCentral()
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "io.awspring.cloud:spring-cloud-aws-dependencies:${springCloudVersion}"
+	}
+}
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-jersey'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	implementation platform('software.amazon.awssdk:bom:2.17.217')
+	implementation 'software.amazon.awssdk:sts'
+	implementation 'software.amazon.awssdk:sqs'
+
+	implementation 'org.modelmapper:modelmapper:2.3.5'
+	implementation 'com.github.java-json-tools:json-patch:1.12'
+	implementation 'io.awspring.cloud:spring-cloud-aws-messaging'
+	implementation 'io.awspring.cloud:spring-cloud-aws-autoconfigure'
+	implementation 'org.springframework.boot:spring-boot-starter-cache'
+	implementation 'com.amazonaws:aws-java-sdk-sts:1.12.132'
+}
+test {
+	useJUnitPlatform()
+	finalizedBy jacocoTestReport
+}
+jacocoTestReport {
+	reports {
+		xml.enabled true
+	}
+}
+
+task printVersion {
+	doLast {
+		println version
+	}
+}
