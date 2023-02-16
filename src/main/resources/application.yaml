@@ -22,4 +22,4 @@ logging:
   level:
     io.awspring.cloud.messaging.core: info
     io.awspring.cloud.messaging.listener: info
-    com.amazonaws.services.sqs: debug
+    com.amazonaws.services.sqs: info

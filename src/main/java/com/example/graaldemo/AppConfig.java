@@ -32,6 +32,7 @@ public class AppConfig {
     @Bean(name = "sqs-thread-pool-executor")
     public AsyncTaskExecutor asyncTaskExecutor() {
         ThreadPoolTaskExecutor asyncTaskExecutor = new ThreadPoolTaskExecutor();
+        //asyncTaskExecutor.setCorePoolSize(10);
         asyncTaskExecutor.setMaxPoolSize(100);
         asyncTaskExecutor.setQueueCapacity(0);
         asyncTaskExecutor.setThreadNamePrefix("threadPoolExecutor-SQSContainer-");
@@ -49,13 +50,13 @@ public class AppConfig {
         return asyncTaskExecutor;
     }
 
-    @Bean
-    public SimpleMessageListenerContainerFactory sqsContainerFactory() {
-        SimpleMessageListenerContainerFactory simpleMessageListenerContainerFactory
-                = new SimpleMessageListenerContainerFactory();
-        simpleMessageListenerContainerFactory.setTaskExecutor(asyncTaskExecutor());
-        simpleMessageListenerContainerFactory.setMaxNumberOfMessages(10);
-        return simpleMessageListenerContainerFactory;
-    }
+//    @Bean
+//    public SimpleMessageListenerContainerFactory sqsContainerFactory() {
+//        SimpleMessageListenerContainerFactory simpleMessageListenerContainerFactory
+//                = new SimpleMessageListenerContainerFactory();
+//        simpleMessageListenerContainerFactory.setTaskExecutor(asyncTaskExecutor());
+//        simpleMessageListenerContainerFactory.setMaxNumberOfMessages(10);
+//        return simpleMessageListenerContainerFactory;
+//    }
 
 }
