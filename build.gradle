@@ -1,22 +1,29 @@
 plugins {
-	id 'org.springframework.boot' version '2.6.7'
+	id 'org.springframework.boot' version '2.7.7'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 	id 'org.sonarqube' version '3.0'
 	id 'jacoco'
+	id 'org.springframework.experimental.aot' version '0.12.2'
 }
 
 ext {
 	set('springCloudVersion', "2.3.5")
 }
 
-
+bootBuildImage {
+	builder = "paketobuildpacks/builder:tiny"
+	environment = [
+			"BP_NATIVE_IMAGE" : "true"
+	]
+}
 group = 'com.vertexinc.commonconfig'
 sourceCompatibility = '17'
 version='1.0'
 
 repositories {
 	mavenCentral()
+	maven { url = uri("https://repo.spring.io/release") }
 }
 
 dependencyManagement {

@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 public class AppConfig {
 
     @Bean
-    AmazonSQSAsync amazonSQS(AWSCredentialsProvider awsCredentialsProvider) {
+    AmazonSQSAsync amazonSQS() {
         return AmazonSQSAsyncClientBuilder.standard()
                 .withEndpointConfiguration(
                         new AwsClientBuilder.EndpointConfiguration("http://localhost:4566","us-east-1"))
