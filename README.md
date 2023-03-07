@@ -2,30 +2,25 @@
 
 ## SQS With localstack
 This application demonstrate usage of sqs with localstack.
-Start localstack with command 
+Install localstack
+```
+python3 -m pip install localstack
+```
+Start localstack with command (you should have docker on your machine)
 ```
 localstack start
 ```
 Above command will start container in docker. 
 Check configuration in ```com.example.graaldemo.AppConfig.java```
 
-## GraalVM Native Support
+Run class ```GraaldemoApplication.java``` from IDE 
 
-This project has been configured to let you generate either a lightweight container or a native executable.
-It is also possible to run your tests in a native image.
-
-### Lightweight Container with Cloud Native Buildpacks
-If you're already familiar with Spring Boot container images support, this is the easiest way to get started.
-Docker should be installed and configured on your machine prior to creating the image.
-
-To create the image, run the following goal:
-
+Post sqs messages to locastack and you will see them get consumed by application.
+Create Queue
 ```
-$ ./gradlew bootBuildImage
+awslocal sqs create-queue --queue-name sample-queue
 ```
-
-Then, you can run the app like any other container:
-
+and post message
 ```
-$ docker run --rm -p 8080:8080 graaldemo:0.0.1-SNAPSHOT
+awslocal sqs send-message --queue-url http://localhost:4566/00000000000/sample-queue --message-body test1
 ```
