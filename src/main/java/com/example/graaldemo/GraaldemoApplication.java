@@ -1,5 +1,6 @@
 package com.example.graaldemo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,9 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GraaldemoApplication {
 
+	@Autowired
+	Listener listener;
+
 	@RequestMapping("/")
 	String home() {
-		return "Hello World!";
+		listener.send("Hello World!");
+		return "completed send operation";
 	}
 
 	public static void main(String[] args) {

@@ -33,7 +33,7 @@ public class AppConfig {
     public AsyncTaskExecutor asyncTaskExecutor() {
         ThreadPoolTaskExecutor asyncTaskExecutor = new ThreadPoolTaskExecutor();
         //asyncTaskExecutor.setCorePoolSize(10);
-        asyncTaskExecutor.setMaxPoolSize(100);
+        asyncTaskExecutor.setMaxPoolSize(300);
         asyncTaskExecutor.setQueueCapacity(0);
         asyncTaskExecutor.setThreadNamePrefix("threadPoolExecutor-SQSContainer-");
         asyncTaskExecutor.initialize();
